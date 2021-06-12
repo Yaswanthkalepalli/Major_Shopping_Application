@@ -187,15 +187,20 @@ namespace ShoopingDAL
             return status;
         }
 
-        public bool Updatecategories(Categories categoryUpdate)
+        public bool Updatecategories(int catID,Categories cat)
         {
+            Categories catUpdate = new Categories();
+            catUpdate.catID = catID;
+            catUpdate.catName = cat.catName;
+            catUpdate.catImg = cat.catImg;
             bool status = false;
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
             SqlCommand cmd = new SqlCommand("[dbo].[UpdateCategoreiesRecord]", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cn.Open();
-            cmd.Parameters.AddWithValue("@catName", categoryUpdate.catName);
-            cmd.Parameters.AddWithValue("@catImg", categoryUpdate.catImg);
+            cmd.Parameters.AddWithValue("@catID", catUpdate.catID);
+            cmd.Parameters.AddWithValue("@catName", catUpdate.catName);
+            cmd.Parameters.AddWithValue("@catImg", catUpdate.catImg);
             try
             {
                 cmd.ExecuteNonQuery();
@@ -257,14 +262,21 @@ namespace ShoopingDAL
         {
             bool status = false;
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
-            SqlDataAdapter da = new SqlDataAdapter("select * from Categories", cn);
-            DataSet ds = new DataSet("onlineshopping");
-            da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-            da.Fill(ds, "Categories");
-            ds.Tables["Categories"].Rows.Find(catID).Delete();
-            SqlCommandBuilder builder = new SqlCommandBuilder(da);
-            da.Update(ds.Tables["products"]);
-            status = true;
+            SqlCommand cmd = new SqlCommand("[dbo].[DeleteCategoreiesRecord]", cn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@catID", catID);
+            cn.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            cn.Close();
             return status;
         }
     }
