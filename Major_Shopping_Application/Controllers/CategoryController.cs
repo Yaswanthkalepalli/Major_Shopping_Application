@@ -11,8 +11,7 @@ using System.Web;
 using System.IO;
 
 namespace Major_Shopping_Application.Controllers
-{
-    
+{   
     public class CategoryController : ApiController
     {
         ShoopingDal shoopingDal = new ShoopingDal();
@@ -22,22 +21,29 @@ namespace Major_Shopping_Application.Controllers
             List<Categories> listCat = new List<Categories>();
             listCat = shoopingDal.GetCategories();
             return listCat;
-
         }
 
         //GET: api/Category/5
-        //public HttpResponseMessage Get(int id)
-        //{
-        //    //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK);
-
-        //    return "value";
-        //}
-
-        // POST: api/Category
-        public void Post([FromBody]ShoopingApplicationModel value)
+        public List<CategoryModel> Get(int id)
         {
+            List<Categories> catList = new List<Categories>();
+            List<CategoryModel> model = new List<CategoryModel>();
+            catList = shoopingDal.FindCategories(id);
+            foreach(var items in catList)
+            {
+                CategoryModel cat = new CategoryModel();
+                cat.catID = items.catID;
+                cat.catName = items.catName;
+                cat.catImg = items.catImg;
+                model.Add(cat);
+            }
+            return model;
+        }
+
+            // POST: api/Category
+            public void Post([FromBody]ShoopingApplicationModel value)
+            {
             Categories cat = new Categories();
-           // cat.catID = value.catID;
             cat.catName = value.catName;
             byte[] bytes;
             var httpreq = HttpContext.Current.Request;
@@ -48,7 +54,7 @@ namespace Major_Shopping_Application.Controllers
             }
             cat.catImg = bytes;
             shoopingDal.Insertcategories(cat);
-        }
+            }
 
         // PUT: api/Category/5
         public void Put(int id, [FromBody]string value)

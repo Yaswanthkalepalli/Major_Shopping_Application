@@ -171,7 +171,6 @@ namespace ShoopingDAL
             SqlCommand cmd = new SqlCommand("[dbo].[InsertCategoryRecord]", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cn.Open();
-            //cmd.Parameters.AddWithValue("@catID", categoryinput.catID);
             cmd.Parameters.AddWithValue("@catName", categoryinput.catName);
             cmd.Parameters.AddWithValue("@catImg", categoryinput.catImg);
             try
@@ -231,15 +230,35 @@ namespace ShoopingDAL
             cn.Close();
             return catlist;
         }
-
         
+        public List<Categories> FindCategories(int catID)
+        {
+            List<Categories> catList = new List<Categories>();
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
+            SqlCommand cmd = new SqlCommand("select * from  Categories where catID like '"+catID+"'", cn);
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            Categories category = new Categories();
+            if (dr.HasRows)
+            {
+                dr.Read();
+                category.catID = Convert.ToInt32(dr["catID"]);
+                category.catName = dr["catName"].ToString();
+                byte[] photoArray = (byte[])dr["catImg"];
+                MemoryStream stream = new MemoryStream(photoArray);
+                category.catImg = stream.ToArray();
+                catList.Add(category);
+            }
+            cn.Close();
+            return catList;
+        }
 
-        DataSet ds = new DataSet("onlineshopping");
         public bool DeletecategoryData(int catID)
         {
             bool status = false;
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
             SqlDataAdapter da = new SqlDataAdapter("select * from Categories", cn);
+            DataSet ds = new DataSet("onlineshopping");
             da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
             da.Fill(ds, "Categories");
             ds.Tables["Categories"].Rows.Find(catID).Delete();

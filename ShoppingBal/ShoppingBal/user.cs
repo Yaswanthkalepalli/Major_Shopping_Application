@@ -74,7 +74,6 @@ namespace ShoppingBal
         public int catID { get; set; }
         public string catName { get; set; }
         public byte[] catImg { get; set; }
-        public string CatImage { get; set; }
     }
 
     public class OnlinePayment
