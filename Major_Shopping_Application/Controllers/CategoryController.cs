@@ -43,28 +43,34 @@ namespace Major_Shopping_Application.Controllers
             // POST: api/Category
             public void Post([FromBody]ShoopingApplicationModel value)
             {
-            Categories cat = new Categories();
-            cat.catName = value.catName;
-            byte[] bytes;
-            var httpreq = HttpContext.Current.Request;
-            var postedFile = httpreq.InputStream;
-            using(BinaryReader br = new BinaryReader(postedFile))
-            {
-                bytes = br.ReadBytes(httpreq.ContentLength);
-            }
-            cat.catImg = bytes;
-            shoopingDal.Insertcategories(cat);
+                Categories cat = new Categories();
+                cat.catName = value.catName;
+                byte[] bytes;
+                var httpreq = HttpContext.Current.Request;
+                var postedFile = httpreq.InputStream;
+                using(BinaryReader br = new BinaryReader(postedFile))
+                {
+                    bytes = br.ReadBytes(httpreq.ContentLength);
+                }
+                cat.catImg = bytes;
+                shoopingDal.Insertcategories(cat);
             }
 
         // PUT: api/Category/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]CategoryModel value)
         {
+            List<Categories> catList = new List<Categories>();
+            List<CategoryModel> model = new List<CategoryModel>();
+            catList = shoopingDal.Updatecategories(id);
 
         }
 
         // DELETE: api/Category/5
         public void Delete(int id)
         {
+
         }
+
+
     }
 }

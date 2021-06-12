@@ -171,6 +171,7 @@ namespace ShoopingDAL
             SqlCommand cmd = new SqlCommand("[dbo].[InsertCategoryRecord]", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cn.Open();
+    
             cmd.Parameters.AddWithValue("@catName", categoryinput.catName);
             cmd.Parameters.AddWithValue("@catImg", categoryinput.catImg);
             try
@@ -186,16 +187,15 @@ namespace ShoopingDAL
             return status;
         }
 
-        public bool Updatecategories(Categories categoryupdate)
+        public bool Updatecategories(Categories categoryUpdate)
         {
             bool status = false;
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
             SqlCommand cmd = new SqlCommand("[dbo].[UpdateCategoreiesRecord]", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cn.Open();
-            cmd.Parameters.AddWithValue("@catID", categoryupdate.catID);
-            cmd.Parameters.AddWithValue("@catName", categoryupdate.catName);
-            cmd.Parameters.AddWithValue("@catImg", categoryupdate.catImg);
+            cmd.Parameters.AddWithValue("@catName", categoryUpdate.catName);
+            cmd.Parameters.AddWithValue("@catImg", categoryUpdate.catImg);
             try
             {
                 cmd.ExecuteNonQuery();
