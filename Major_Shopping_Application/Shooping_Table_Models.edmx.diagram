@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="74e6197cffad45068d93b3c8b5445e85" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineShoppingModel.AdminTable" Width="1.5" PointX="5.75" PointY="1.125" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Category" Width="1.5" PointX="1" PointY="11.125" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.FeedBack" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.OnlinePayment" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.OrderDetail" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Order" Width="1.5" PointX="3" PointY="9.25" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.ProductDetail" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.User" Width="1.5" PointX="0.75" PointY="4.625" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__ProductDe__categ__07C12930" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__FeedBack__produc__0B91BA14" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__FeedBack__userID__0A9D95DB" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__OnlinePay__userI__75A278F5" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__OrderDeta__oderI__0E6E26BF" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__OrderDeta__produ__0F624AF8" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__Orders__userID__01142BA1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
