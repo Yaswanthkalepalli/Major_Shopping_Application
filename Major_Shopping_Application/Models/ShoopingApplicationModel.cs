@@ -57,6 +57,8 @@ namespace Major_Shopping_Application.Models
         public string catName { get; set; }
         public byte[] catImg { get; set; }
 
+        public string CatImage { get; set; }
+
         public long cardNumber { get; set; }
         public int CVV { get; set; }
         public DateTime expDate { get; set; }

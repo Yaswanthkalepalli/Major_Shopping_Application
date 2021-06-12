@@ -18,7 +18,7 @@ namespace Major_Shopping_Application
         public string userName { get; set; }
         public long cardNumber { get; set; }
         public int CVV { get; set; }
-        public System.DateTime expDate { get; set; }
+        public string expDate { get; set; }
     
         public virtual User User { get; set; }
     }

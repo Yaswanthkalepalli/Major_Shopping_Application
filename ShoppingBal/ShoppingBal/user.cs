@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingBal
 {
-    public class user
+    public class users
     {
         public int userID { get; set; }
         public string userName { get; set; }
@@ -19,7 +19,7 @@ namespace ShoppingBal
         public string userCountry { get; set; }
     }
 
-    public class order : user
+    public class order 
     {
         public int uID { get; set; }
         public int orderID { get; set; }
@@ -69,15 +69,16 @@ namespace ShoppingBal
         public string adminPassword { get; set; }
     }
 
-    public class Category
+    public class Categories
     {
         public int catID { get; set; }
         public string catName { get; set; }
         public byte[] catImg { get; set; }
+        public string CatImage { get; set; }
     }
+
     public class OnlinePayment
     {
-
         public int userID { get; set; }
         public string userName { get; set; }
         public long cardNumber { get; set; }

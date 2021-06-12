@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShoppingBal;
+using System.Drawing;
+using Microsoft.VisualBasic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShoopingDAL
 {
     public class ShoopingDal
     {
-        public bool InsertUser(user userinput)
+        public bool InsertUser(users userinput)
         {
             bool status = false;
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
@@ -41,7 +45,7 @@ namespace ShoopingDAL
             return status;
         }
 
-        public bool UpdateUser(user userUpdate)
+        public bool UpdateUser(users userUpdate)
         {
             bool status = false;
             SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["OnlineShoppingEntities"].ConnectionString);
@@ -160,14 +164,14 @@ namespace ShoopingDAL
             return prodlist;
         }
 
-        public bool Insertcategories(Category categoryinput)
+        public bool Insertcategories(Categories categoryinput)
         {
             bool status = false;
-            SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["OnlineShoppingEntities"].ConnectionString);
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
             SqlCommand cmd = new SqlCommand("[dbo].[InsertCategoryRecord]", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cn.Open();
-            cmd.Parameters.AddWithValue("@catID", categoryinput.catID);
+            //cmd.Parameters.AddWithValue("@catID", categoryinput.catID);
             cmd.Parameters.AddWithValue("@catName", categoryinput.catName);
             cmd.Parameters.AddWithValue("@catImg", categoryinput.catImg);
             try
@@ -183,10 +187,10 @@ namespace ShoopingDAL
             return status;
         }
 
-        public bool Updatecategories(Category categoryupdate)
+        public bool Updatecategories(Categories categoryupdate)
         {
             bool status = false;
-            SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["OnlineShoppingEntities"].ConnectionString);
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
             SqlCommand cmd = new SqlCommand("[dbo].[UpdateCategoreiesRecord]", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cn.Open();
@@ -207,24 +211,28 @@ namespace ShoopingDAL
         }
 
 
-        public List<Category> GetCategories()
+        public List<Categories> GetCategories()
         {
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
-            SqlCommand cmd = new SqlCommand("select * from  [dbo].[Categories]()", cn);
+            SqlCommand cmd = new SqlCommand("select * from  Categories", cn);
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-            List<Category> catlist = new List<Category>();
+            List<Categories> catlist = new List<Categories>();
             while (dr.Read())
             {
-                Category c = new Category();
+                Categories c = new Categories();
                 c.catID = Convert.ToInt32(dr["catID"]);
                 c.catName = dr[1].ToString();
-                c.catImg = (Byte[])(dr["catImg"]);
+                byte[] photoArray = (byte[])dr["catImg"];
+                MemoryStream stream = new MemoryStream(photoArray);
+                c.catImg = stream.ToArray();
                 catlist.Add(c);
             }
             cn.Close();
             return catlist;
         }
+
+        
 
         DataSet ds = new DataSet("onlineshopping");
         public bool DeletecategoryData(int catID)

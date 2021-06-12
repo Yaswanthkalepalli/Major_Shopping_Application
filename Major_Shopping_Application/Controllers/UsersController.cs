@@ -28,7 +28,7 @@ namespace Major_Shopping_Application.Controllers
         // POST: api/Users
         public void Post([FromBody]ShoopingApplicationModel value)
         {
-            user u = new user();
+            users u = new users();
             //u.userID = value.userID;
             u.userName = value.userName;
             u.userEmail = value.userEmail;

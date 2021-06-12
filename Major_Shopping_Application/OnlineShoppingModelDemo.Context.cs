@@ -13,10 +13,10 @@ namespace Major_Shopping_Application
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OnlineShoppingEntities : DbContext
+    public partial class OnlineShoppingEntities1 : DbContext
     {
-        public OnlineShoppingEntities()
-            : base("name=OnlineShoppingEntities")
+        public OnlineShoppingEntities1()
+            : base("name=OnlineShoppingEntities1")
         {
         }
     
