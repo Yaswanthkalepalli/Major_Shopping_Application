@@ -16,6 +16,7 @@ namespace ShoopingDAL
 {
     public class ShoopingDal
     {
+
         public bool InsertUser(users userinput)
         {
             bool status = false;
@@ -24,14 +25,14 @@ namespace ShoopingDAL
             cmd.CommandType = CommandType.StoredProcedure;
             cn.Open();
             //cmd.Parameters.AddWithValue("@userID", userinput.userID);
-            cmd.Parameters.AddWithValue("@userName", userinput.userName);
-            cmd.Parameters.AddWithValue("@userEmail", userinput.userEmail);
-            cmd.Parameters.AddWithValue("@userPassword", userinput.userPassword);
-            cmd.Parameters.AddWithValue("@userPhone", userinput.userPhone);
-            cmd.Parameters.AddWithValue("@userAddress", userinput.userAddress);
-            cmd.Parameters.AddWithValue("@userCity", userinput.userCity);
-            cmd.Parameters.AddWithValue("@userState", userinput.userstate);
-            cmd.Parameters.AddWithValue("@userCountry", userinput.userCountry);
+            cmd.Parameters.AddWithValue("@UserName", userinput.userName);
+            cmd.Parameters.AddWithValue("@UserEmail", userinput.userEmail);
+            cmd.Parameters.AddWithValue("@UserPassword", userinput.userPassword);
+            cmd.Parameters.AddWithValue("@UserPhone", userinput.userPhone);
+            cmd.Parameters.AddWithValue("@UserAddress", userinput.userAddress);
+            cmd.Parameters.AddWithValue("@UserCity", userinput.userCity);
+            cmd.Parameters.AddWithValue("@UserState", userinput.userstate);
+            cmd.Parameters.AddWithValue("@UserCountry", userinput.userCountry);
             try
             {
                 cmd.ExecuteNonQuery();

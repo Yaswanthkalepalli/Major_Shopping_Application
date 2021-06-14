@@ -11,7 +11,7 @@ namespace Major_Shopping_Application.Models
         public string userName { get; set; }
         public string userEmail { get; set; }
         public string userPassword { get; set; }
-        public long userPhone { get; set; }
+        public string userPhone { get; set; }
         public string userAddress { get; set; }
         public string userCity { get; set; }
         public string userstate { get; set; }

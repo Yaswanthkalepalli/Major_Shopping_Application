@@ -7,11 +7,14 @@ using System.Web.Http;
 using ShoopingDAL;
 using ShoppingBal;
 using Major_Shopping_Application.Models;
+using System.Web.Http.Cors;
 
 namespace Major_Shopping_Application.Controllers
 {
+    [EnableCors(headers: "*", methods: "*", origins: "*")]
     public class UsersController : ApiController
     {
+        
         // GET: api/Users
         ShoopingDal ShoopingDal = new ShoopingDal();
         public IEnumerable<string> Get()
@@ -26,13 +29,14 @@ namespace Major_Shopping_Application.Controllers
         }
 
         // POST: api/Users
+        [EnableCors(headers: "*", methods: "*", origins: "*")]
         public void Post([FromBody]ShoopingApplicationModel value)
         {
             users u = new users();
-            //u.userID = value.userID;
             u.userName = value.userName;
             u.userEmail = value.userEmail;
             u.userPassword = value.userPassword;
+            u.userPhone = Convert.ToInt32(value.userPhone);
             u.userAddress = value.userAddress;
             u.userCity = value.userCity;
             u.userstate = value.userstate;
