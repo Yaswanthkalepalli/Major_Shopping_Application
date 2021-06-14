@@ -177,6 +177,7 @@
     </Compile>
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginDetailsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="FeedBack.cs">
@@ -186,6 +187,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\LoginDetails.cs" />
     <Compile Include="Models\ShoopingApplicationModel.cs" />
     <Compile Include="OnlinePayment.cs">
       <DependentUpon>OnlineShoppingModelDemo.tt</DependentUpon>

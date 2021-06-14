@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace ShoppingBal
 {
+    public class Login
+    {
+        public string userEmail { get; set; }
+        public string userPassword { get; set; }
+    }
+
     public class users
     {
         public int userID { get; set; }
@@ -19,6 +25,7 @@ namespace ShoppingBal
         public string userCountry { get; set; }
     }
 
+    
     public class order 
     {
         public int uID { get; set; }

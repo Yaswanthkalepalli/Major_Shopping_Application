@@ -44,6 +44,8 @@ namespace Major_Shopping_Application.Controllers
             ShoopingDal.InsertUser(u);
         }
 
+        
+
         // PUT: api/Users/5
         public void Edit(int id, [FromBody]string value)
         {

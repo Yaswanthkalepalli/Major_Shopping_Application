@@ -16,6 +16,31 @@ namespace ShoopingDAL
 {
     public class ShoopingDal
     {
+        public bool ValidateUser(Login l)
+        {
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
+            SqlCommand cmd = new SqlCommand("[dbo].[ValidateLogin]", cn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@emailId", l.userEmail);
+            cmd.Parameters.AddWithValue("@password", l.userPassword);
+            cmd.Parameters.AddWithValue("@value", 0);
+            bool status;
+            cn.Open();
+            cmd.Parameters["@value"].Direction = System.Data.ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            int value = Convert.ToInt32(cmd.Parameters["@value"].Value);
+            status = Convert.ToBoolean(cmd.Parameters["@value"].Value);
+            if (status)
+            {
+                return true;
+                cn.Close();
+            }
+            else
+            {
+                return false;
+            }
+            return status;
+        }
 
         public bool InsertUser(users userinput)
         {

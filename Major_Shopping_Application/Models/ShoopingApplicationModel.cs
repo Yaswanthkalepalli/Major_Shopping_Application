@@ -17,6 +17,9 @@ namespace Major_Shopping_Application.Models
         public string userstate { get; set; }
         public string userCountry { get; set; }
 
+
+
+
         public int uID { get; set; }
         public int orderID { get; set; }
         public DateTime orderDate { get; set; }
