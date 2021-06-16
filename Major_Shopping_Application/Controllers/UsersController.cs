@@ -36,7 +36,7 @@ namespace Major_Shopping_Application.Controllers
             u.userName = value.userName;
             u.userEmail = value.userEmail;
             u.userPassword = value.userPassword;
-            u.userPhone = Convert.ToInt32(value.userPhone);
+            u.userPhone = Convert.ToInt64(value.userPhone);
             u.userAddress = value.userAddress;
             u.userCity = value.userCity;
             u.userstate = value.userstate;

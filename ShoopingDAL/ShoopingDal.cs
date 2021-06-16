@@ -99,6 +99,87 @@ namespace ShoopingDAL
             return status;
         }
 
+        public List<productdetails> FindProduct(int catID)
+        {
+            List<productdetails> prodlist = new List<productdetails>();
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
+            SqlCommand cmd = new SqlCommand("select * from ProductDetails where categoryID like '" + catID + "'", cn);
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    productdetails pd = new productdetails();
+                    pd.productID = Convert.ToInt32(dr["productID"]);
+                    pd.productName = dr["productName"].ToString();
+                    pd.productDescription = dr["productDescription"].ToString();
+                    //MemoryStream ms = new MemoryStream();
+                    byte[] photoArray = (byte[])dr["productImage"];
+                    MemoryStream ms = new MemoryStream(photoArray);
+                    pd.productImage = ms.ToArray();
+                    pd.productPrice = Convert.ToInt32(dr["productPrice"]);
+                    pd.productSize = dr["productSize"].ToString();
+                    pd.quantity = Convert.ToInt32(dr["quantity"]);
+                    prodlist.Add(pd);
+                }
+            }
+            cn.Close();
+            return prodlist;
+        }
+
+        public bool AddingToCart(AddToCart addCart)
+        {
+            bool status = false;
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
+            SqlCommand cmd = new SqlCommand("[dbo].[InsertIntoCart]", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cn.Open();
+            cmd.Parameters.AddWithValue("@productID", addCart.productID);
+            cmd.Parameters.AddWithValue("@productName", addCart.productName);
+            cmd.Parameters.AddWithValue("@productPrice", addCart.productPrice);
+            cmd.Parameters.AddWithValue("@productImage", addCart.productImage);
+            cmd.Parameters.AddWithValue("@quantity", addCart.quantity);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cn.Close();
+            return status;
+        }
+
+        public List<AddToCart> GetAllFromCart()
+        {
+            List<AddToCart> cartList = new List<AddToCart>();
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
+            SqlCommand cmd = new SqlCommand("select * from AddToCart", cn);
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    AddToCart pd = new AddToCart();
+                    pd.productID = Convert.ToInt32(dr["productID"]);
+                    pd.productName = dr["productName"].ToString();
+                    byte[] photoArray = (byte[])dr["productImage"];
+                    MemoryStream ms = new MemoryStream(photoArray);
+                    pd.productImage = ms.ToArray();
+                    pd.productPrice = Convert.ToInt32(dr["productPrice"]);
+                    pd.quantity = Convert.ToInt32(dr["quantity"]);
+                    cartList.Add(pd);
+                }
+            }
+            cn.Close();
+            return cartList;
+        }
+
+
         public bool InsertProduct(productdetails productInput)
         {
             bool status = false;
@@ -189,6 +270,9 @@ namespace ShoopingDAL
             cn.Close();
             return prodlist;
         }
+
+
+
 
         public bool Insertcategories(Categories categoryinput)
         {

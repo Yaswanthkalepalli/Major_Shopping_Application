@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace ShoppingBal
 {
+    public class AddToCart
+    {
+        public int productID { get; set; }
+        public string  productName { get; set; }
+        public long productPrice { get; set; }
+        public byte[] productImage { get; set; }
+        public int quantity { get; set; }
+    }
+
     public class Login
     {
         public string userEmail { get; set; }

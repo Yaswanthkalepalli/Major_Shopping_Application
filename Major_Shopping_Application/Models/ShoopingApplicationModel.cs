@@ -34,7 +34,7 @@ namespace Major_Shopping_Application.Models
         public int oderId { get; set; }
         public int productID { get; set; }
         public decimal unitPrice { get; set; }
-        public int quantity { get; set; }
+        public int Quantity { get; set; }
         public float discount { get; set; }
 
         public int categoryID { get; set; }
@@ -44,7 +44,7 @@ namespace Major_Shopping_Application.Models
         public int productPrice { get; set; }
         public byte[] productImage { get; set; }
         public string productSize { get; set; }
-        public int Quantity { get; set; }
+        public int quantity { get; set; }
 
         public int usersID { get; set; }
         public int proID { get; set; }
