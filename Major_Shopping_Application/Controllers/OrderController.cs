@@ -7,9 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Major_Shopping_Application.Controllers
 {
+    [EnableCors(headers: "*", methods: "*", origins: "*")]
     public class OrderController : ApiController
     {
         ShoopingDal ShoopingDal = new ShoopingDal();
@@ -35,7 +37,6 @@ namespace Major_Shopping_Application.Controllers
             od.delieveryCity = value.delieveryCity;
             od.delieveryState = value.delieveryState;
             od.delieveryPincode = value.delieveryPincode;
-
             ShoopingDal.InsertOrder(od);
         }
 

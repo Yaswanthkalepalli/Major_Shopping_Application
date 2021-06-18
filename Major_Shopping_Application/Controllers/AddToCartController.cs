@@ -51,10 +51,17 @@ namespace Major_Shopping_Application.Controllers
         public void Put(int id, [FromBody]string value)
         {
         }
+        //public void delete(int productID)
+        //{
+        //    shoopingDal.DeleteSingleItemFromCart(productID);
+        //}
 
         // DELETE: api/AddToCart/5
-        public void Delete(int id)
+       public void Delete()
         {
+            shoopingDal.DeleteItemsInCart();
         }
+
+        
     }
 }

@@ -16,6 +16,47 @@ namespace ShoopingDAL
 {
     public class ShoopingDal
     {
+
+        public bool DeleteSingleItemFromCart(int productID)
+        {
+            bool status = false;
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
+            SqlCommand cmd = new SqlCommand("delete from CartDetails where productID '" + productID + "'", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cn.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cn.Close();
+            return status;
+        }
+        public bool DeleteItemsInCart()
+        {
+            bool status = false;
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
+            SqlCommand cmd = new SqlCommand("[dbo].[DeleteCartRecord]", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cn.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cn.Close();
+            return status;
+        }
+
+
         public bool InsertOrder(orderDetails orderinput)
         {
             bool status = false;
@@ -103,7 +144,6 @@ namespace ShoopingDAL
             cmd.Parameters.AddWithValue("@userName", userUpdate.userName);
             cmd.Parameters.AddWithValue("@userEmail", userUpdate.userEmail);
             cmd.Parameters.AddWithValue("@userPassword", userUpdate.userPassword);
-
             try
             {
                 cmd.ExecuteNonQuery();
@@ -246,21 +286,7 @@ namespace ShoopingDAL
             cn.Close();
             return status;
         }
-        public bool DeleteProduct(int productID)
-        {
-            bool status = false;
-
-            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
-            DataSet ds = new DataSet("OnlineShoppingEntities");
-            SqlDataAdapter da = new SqlDataAdapter("select * from Categories", cn);
-            da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-            da.Fill(ds, "Categories");
-            ds.Tables["Categories"].Rows.Find(productID).Delete();
-            SqlCommandBuilder builder = new SqlCommandBuilder(da);
-            da.Update(ds.Tables["products"]);
-            status = true;
-            return status;
-        }
+        
 
         public List<productdetails> GetProductsDetails()
         {
