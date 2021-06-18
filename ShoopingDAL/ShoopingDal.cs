@@ -49,7 +49,6 @@ namespace ShoopingDAL
             SqlCommand cmd = new SqlCommand("[dbo].[InsertUserRecord]", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cn.Open();
-            //cmd.Parameters.AddWithValue("@userID", userinput.userID);
             cmd.Parameters.AddWithValue("@UserName", userinput.userName);
             cmd.Parameters.AddWithValue("@UserEmail", userinput.userEmail);
             cmd.Parameters.AddWithValue("@UserPassword", userinput.userPassword);
@@ -128,7 +127,7 @@ namespace ShoopingDAL
             return prodlist;
         }
 
-        public bool AddingToCart(AddToCart addCart)
+        public bool InsertIntoCart(AddToCart addCart)
         {
             bool status = false;
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
@@ -138,7 +137,6 @@ namespace ShoopingDAL
             cmd.Parameters.AddWithValue("@productID", addCart.productID);
             cmd.Parameters.AddWithValue("@productName", addCart.productName);
             cmd.Parameters.AddWithValue("@productPrice", addCart.productPrice);
-            cmd.Parameters.AddWithValue("@productImage", addCart.productImage);
             cmd.Parameters.AddWithValue("@quantity", addCart.quantity);
             try
             {
@@ -157,7 +155,7 @@ namespace ShoopingDAL
         {
             List<AddToCart> cartList = new List<AddToCart>();
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
-            SqlCommand cmd = new SqlCommand("select * from AddToCart", cn);
+            SqlCommand cmd = new SqlCommand("select * from CartDetails", cn);
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.HasRows)
@@ -167,9 +165,6 @@ namespace ShoopingDAL
                     AddToCart pd = new AddToCart();
                     pd.productID = Convert.ToInt32(dr["productID"]);
                     pd.productName = dr["productName"].ToString();
-                    byte[] photoArray = (byte[])dr["productImage"];
-                    MemoryStream ms = new MemoryStream(photoArray);
-                    pd.productImage = ms.ToArray();
                     pd.productPrice = Convert.ToInt32(dr["productPrice"]);
                     pd.quantity = Convert.ToInt32(dr["quantity"]);
                     cartList.Add(pd);
