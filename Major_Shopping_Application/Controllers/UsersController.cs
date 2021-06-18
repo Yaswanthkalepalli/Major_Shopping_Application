@@ -37,10 +37,6 @@ namespace Major_Shopping_Application.Controllers
             u.userEmail = value.userEmail;
             u.userPassword = value.userPassword;
             u.userPhone = Convert.ToInt64(value.userPhone);
-            u.userAddress = value.userAddress;
-            u.userCity = value.userCity;
-            u.userstate = value.userstate;
-            u.userCountry = value.userCountry;
             ShoopingDal.InsertUser(u);
         }
 

@@ -45,7 +45,7 @@ namespace Major_Shopping_Application.Controllers
                     addcart.quantity = value[i].quantity;
                 }
                 shoopingDal.InsertIntoCart(addcart);
-            }
+        }
 
         // PUT: api/AddToCart/5
         public void Put(int id, [FromBody]string value)

@@ -7,6 +7,16 @@ namespace Major_Shopping_Application.Models
 {
     public class ShoopingApplicationModel
     {
+
+        public string deluserName { get; set; }
+        public string deluserEmail { get; set; }
+        public string delieveryAddress { get; set; }
+        public string delieveryCity { get; set; }
+        public string delieveryState { get; set; }
+        public int delieveryPincode { get; set; }
+
+
+
         public int userID { get; set; }
         public string userName { get; set; }
         public string userEmail { get; set; }

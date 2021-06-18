@@ -16,6 +16,32 @@ namespace ShoopingDAL
 {
     public class ShoopingDal
     {
+        public bool InsertOrder(orderDetails orderinput)
+        {
+            bool status = false;
+            SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
+            SqlCommand cmd = new SqlCommand("[dbo].[InsertOrderRecord]", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cn.Open();
+            //cmd.Parameters.AddWithValue("@orderID", orderinput.orderID);
+            cmd.Parameters.AddWithValue("@deluserName", orderinput.deluserName);
+            cmd.Parameters.AddWithValue("@deluserEmail", orderinput.deluserEmail);
+            cmd.Parameters.AddWithValue("@delieveryAddress", orderinput.delieveryAddress);
+            cmd.Parameters.AddWithValue("@delieveryCity", orderinput.delieveryCity);
+            cmd.Parameters.AddWithValue("@delieveryState", orderinput.delieveryState);
+            cmd.Parameters.AddWithValue("@delieveryPincode", orderinput.delieveryPincode);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cn.Close();
+            return status;
+        }
         public bool ValidateUser(Login l)
         {
             SqlConnection cn = new SqlConnection("server=yaswanthkalepal\\sqlexpress;Integrated Security=true;database=OnlineShopping");
@@ -53,10 +79,6 @@ namespace ShoopingDAL
             cmd.Parameters.AddWithValue("@UserEmail", userinput.userEmail);
             cmd.Parameters.AddWithValue("@UserPassword", userinput.userPassword);
             cmd.Parameters.AddWithValue("@UserPhone", userinput.userPhone);
-            cmd.Parameters.AddWithValue("@UserAddress", userinput.userAddress);
-            cmd.Parameters.AddWithValue("@UserCity", userinput.userCity);
-            cmd.Parameters.AddWithValue("@UserState", userinput.userstate);
-            cmd.Parameters.AddWithValue("@UserCountry", userinput.userCountry);
             try
             {
                 cmd.ExecuteNonQuery();
@@ -81,10 +103,7 @@ namespace ShoopingDAL
             cmd.Parameters.AddWithValue("@userName", userUpdate.userName);
             cmd.Parameters.AddWithValue("@userEmail", userUpdate.userEmail);
             cmd.Parameters.AddWithValue("@userPassword", userUpdate.userPassword);
-            cmd.Parameters.AddWithValue("@userAddress", userUpdate.userAddress);
-            cmd.Parameters.AddWithValue("@userCity", userUpdate.userCity);
-            cmd.Parameters.AddWithValue("@userState", userUpdate.userstate);
-            cmd.Parameters.AddWithValue("@userCountry", userUpdate.userCountry);
+
             try
             {
                 cmd.ExecuteNonQuery();

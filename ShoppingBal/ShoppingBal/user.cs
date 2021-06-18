@@ -6,6 +6,17 @@ using System.Threading.Tasks;
 
 namespace ShoppingBal
 {
+    public class orderDetails
+    {
+
+        public string deluserName { get; set; }
+        public string deluserEmail { get; set; }
+        public string delieveryAddress { get; set; }
+        public string delieveryCity { get; set; }
+        public string delieveryState { get; set; }
+        public int delieveryPincode { get; set; }
+    }
+
     public class AddToCart
     {
         public int productID { get; set; }
@@ -30,10 +41,7 @@ namespace ShoppingBal
         public string userEmail { get; set; }
         public string userPassword { get; set; }
         public long userPhone { get; set; }
-        public string userAddress { get; set; }
-        public string userCity { get; set; }
-        public string userstate { get; set; }
-        public string userCountry { get; set; }
+
     }
 
     
